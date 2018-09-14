@@ -1,0 +1,815 @@
+﻿drop TABLE LOGIN;
+drop TABLE ASTHENIS;
+drop TABLE PROSWPIKO;
+drop TABLE GIATROS;
+drop TABLE KRATISI;
+drop table EXEI;
+
+create TABLE Login(Username VARCHAR(15) NOT NULL PRIMARY KEY, 
+Password Varchar(8),
+Typos Varchar(10) check (Typos in ('Ασθενής','Προσωπικό')));
+
+begin
+
+insert into Login(Username, Password, Typos) values('stpapad', 'j@3teJi3',
+'Ασθενής');
+
+insert into Login(Username, Password, Typos) values('mardim', 'co3eeJab',
+'Προσωπικό');
+
+end;
+
+create TABLE Asthenis (IDAstheni Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20),
+Thlefwno Varchar(10), 
+Fylo Varchar(10) check (Fylo in ('Άνδρας','Γυναίκα')),
+Username VARCHAR(15),
+CONSTRAINT a_Username foreign key(Username) references Login);
+
+insert into Asthenis(IDAstheni, Epwnymo, Onoma, Thlefwno, 
+Fylo, Username) values(10, 'Παπαδόπουλος', 'Σταύρος', '2310681814', 
+'Άνδρας', 'stpapad');
+
+create TABLE Proswpiko (IDProswpikou Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20),
+Thesi Varchar(40),
+Thlefwno Varchar(10), 
+Fylo Varchar(10) check (Fylo in ('Άνδρας','Γυναίκα')),
+Username VARCHAR(15),
+CONSTRAINT p_Username foreign key(Username) references Login);
+
+insert into Proswpiko(IDProswpikou, Epwnymo, Onoma, Thesi, Thlefwno,
+Fylo, Username) values(100, 'Δημητρίου', 'Μαρία', 'Γραμματέας', 
+'6933498552', 'Γυναίκα', 'mardim');
+
+create TABLE Exei (IDProswpikou Integer NOT NULL, 
+IDGiatrou Integer NOT NULL, 
+primary key (IDProswpikou, IDGiatrou),
+CONSTRAINT d_IDProswpikou foreign key(IDProswpikou) references Proswpiko, 
+CONSTRAINT d_IDGiatrou foreign key(IDGiatrou) references Giatros);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(100, 22);
+
+SELECT A.onoma, A.epwnymo
+FROM Asthenis A INNER JOIN Login L ON A.username=L.username
+WHERE L.typos='Ασθενής';
+
+SELECT P.onoma, P.epwnymo
+FROM Proswpiko P INNER JOIN Login L ON P.username=L.username
+WHERE L.typos='Προσωπικό';
+
+create TABLE Giatros (IDGiatrou Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20), 
+Thlefwno Varchar(10),
+Eidikothta Varchar(40));
+
+insert into Giatros(IDGiatrou, Epwnymo, Onoma, Thlefwno, 
+Eidikothta) values(22, 'Ζαφειρίου', 'Ευάγγελος', '6977224389', 'Οφθαλμίατρος');
+
+create TABLE Kratisi (IDAstheni Integer NOT NULL, 
+IDGiatrou Integer NOT NULL, 
+HmeromhniaKratisis Date, 
+OraKratisis Varchar(5) CHECK (OraKratisis LIKE '__:__'),
+primary key (IDAstheni, IDGiatrou, HmeromhniaKratisis, OraKratisis),
+CONSTRAINT k_IDAstheni foreign key(IDAstheni) references Asthenis, 
+CONSTRAINT k_IDGiatrou foreign key(IDGiatrou) references Giatros);
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(10, 22, '07/05/18', '11:00');
+
+select A.onoma, A.epwnymo, K.orakratisis
+FROM Asthenis A INNER JOIN Kratisi K ON A.IDAstheni=K.IDAstheni
+WHERE OraKratisis LIKE '11:00';
+
+select A.onoma, A.epwnymo
+FROM  Kratisi K INNER JOIN Asthenis A ON A.IDAstheni=K.IDAstheni
+INNER JOIN Giatros G ON K.IDGiatrou=G.IDGiatrou
+WHERE G.eidikothta LIKE 'Οφθαλμίατρος';
+
+
+================================================================================
+
+
+/* ΠΡΟΣΟΧΗ ΕΔΩ!!!!! */
+
+drop TABLE KRATISI;
+drop table EXEI;
+drop TABLE GIATROS;
+drop TABLE PROSWPIKO;
+drop TABLE ASTHENIS;
+drop TABLE LOGIN;
+
+
+================================================================================
+
+
+create TABLE Login(Username VARCHAR(15) PRIMARY KEY, 
+Password Varchar(8),
+Typos Varchar(10) check (Typos in ('Ασθενής','Προσωπικό')));
+
+begin
+
+insert into Login(Username, Password, Typos) values('stpapad', 'ja3teJi3',
+'Ασθενής');
+
+insert into Login(Username, Password, Typos) values('mardim', 'co3eeJab',
+'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('elpiwan', 'zpR8xs3y', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('fotmak', 'h375UfOj', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('geotrits', 'ayO5CjxX', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('emarsen', 'ot7VPgXi', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('agnetsk', 'b0n93JVp', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('theopap', 'je0k6J4z', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('dmakri', 'qULdh0NO', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('elgaval', 'raRpsI0e', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('vgiatra', 'w0OdLx17', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('iwancho', 'nMkSW8Ka', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('alkavak', 'mRO9n7eG', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('tkosov', 'c5U7dvbC', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('dmakrig', 'u2LgwMLG', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('petrom', 'xsQ8hJm1', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('kstavrid', 'nHsK8wIu', 'Ασθενής');
+
+insert into Login(Username, Password, Typos) values
+('irosar', 'mkoLt0ay', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('margav', 'd7ApXNdx', 'Προσωπικό');
+
+insert into Login(Username, Password, Typos) values
+('michagg', 'kcD97gy9', 'Ασθενής');
+
+end;
+
+/*
+
+insert into Login(username, password) values ('vpapouts', 'x3ktdf93');
+
+update Login L
+SET Typos='Ασθενής' WHERE Typos IS NULL;
+
+delete from Login where username='vpapouts';
+
+*/
+
+
+================================================================================
+
+
+create TABLE Asthenis (IDAstheni Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20),
+Thlefwno Varchar(10), 
+Fylo Varchar(10) check (Fylo in ('Άνδρας','Γυναίκα')),
+Username VARCHAR(15),
+CONSTRAINT a_Username foreign key(Username) references Login);
+
+insert into Asthenis(IDAstheni, Epwnymo, Onoma, Thlefwno, 
+Fylo, Username) values(0, null, null, null, null, null);
+
+/* Κάνω ένα sequence και ένα trigger για να αυξάνεται αυτόματα το IDAstheni */
+
+/*
+
+CREATE SEQUENCE asthenis_sequence
+MINVALUE 1
+MAXVALUE 1000
+START WITH 1
+INCREMENT BY 1;
+
+*/
+
+2ο ΙΣΩΣ ΚΑΛΥΤΕΡΟ:
+
+CREATE SEQUENCE asthenis_sequence
+START WITH 1
+INCREMENT BY 1;
+
+/*
+
+CREATE OR REPLACE TRIGGER TR_ASTHENIS
+BEFORE INSERT ON ASTHENIS FOR EACH ROW
+BEGIN
+  SELECT asthenis_sequence.NEXTVAL
+  INTO :NEW.idastheni
+  FROM DUAL;
+  END;
+
+*/
+
+2ο ΙΣΩΣ ΚΑΛΥΤΕΡΟ:
+
+CREATE OR REPLACE TRIGGER ASTHENIS_TRIGGER
+BEFORE INSERT ON ASTHENIS FOR EACH ROW
+BEGIN
+  :new.IDAstheni := asthenis_sequence.nextval;
+  END;
+
+/*
+
+insert into Asthenis(IDAstheni, Epwnymo, Onoma, Thlefwno, 
+Fylo, Username) values(10, 'Παπαδόπουλος', 'Σταύρος', '2310681814', 
+'Άνδρας', 'stpapad');
+
+*/
+
+begin
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Παπαδόπουλος', 'Σταύρος', '2310681814', 'Άνδρας', 'stpapad');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Ιωαννίδου', 'Ελπινίκη', '6977882323', 'Γυναίκα', 'elpiwan');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Μακαντάση', 'Φωτεινή', '6935032327', 'Γυναίκα', 'fotmak');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Παπαλάμπρου', 'Θεοδώρα', '2310353998', 'Γυναίκα', 'theopap');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Μακρή', 'Δήμητρα', '6952395445', 'Γυναίκα', 'dmakri');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Γιατρά', 'Βασιλική', '6940561492', 'Γυναίκα', 'vgiatra');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Κοσσοβίτης', 'Θωμάς', '2310156997', 'Άνδρας', 'tkosov');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Ρωμανός', 'Πέτρος', '6971123763', 'Άνδρας', 'petrom');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Σταυρίδου', 'Κυριακή', '6941998664', 'Γυναίκα', 'kstavrid');
+
+insert into Asthenis(Epwnymo, Onoma, Thlefwno, Fylo, Username) values
+('Αγγέλου', 'Μιχαήλ', '2310523760', 'Άνδρας', 'michagg');
+
+end;
+
+UPDATE ASTHENIS A SET idastheni=2 WHERE A.idastheni=4;
+
+select A.onoma, A.epwnymo
+from Asthenis A INNER JOIN Login L ON A.username=L.username
+where L.username='vgiatra';
+
+
+================================================================================
+
+
+create TABLE Proswpiko (IDProswpikou Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20),
+Thesi Varchar(40),
+Thlefwno Varchar(10), 
+Fylo Varchar(10) check (Fylo in ('Άνδρας','Γυναίκα')),
+Username VARCHAR(15),
+CONSTRAINT p_Username foreign key(Username) references Login);
+
+insert into Proswpiko(IDProswpikou, Epwnymo, Onoma, Thesi, Thlefwno,
+Fylo, Username) values(0, null, null, null, null, null, null);
+
+/* Κάνω ένα sequence και ένα trigger για να αυξάνεται αυτόματα το IDProswpikou */
+
+CREATE SEQUENCE PROSWPIKO_SEQUENCE
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER PROSWPIKO_TRIGGER
+BEFORE INSERT ON PROSWPIKO FOR EACH ROW
+BEGIN
+  :new.IDProswpikou := PROSWPIKO_SEQUENCE.nextval;
+  END;
+
+begin
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values('Δημητρίου', 'Μαρία', 'Γραμματέας', '6933498552', 'Γυναίκα', 'mardim');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Τρίτσης', 'Γεώργιος', 'Γραμματέας', '6952682147', 'Άνδρας', 'geotrits');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Αρσενίου', 'Εμμανουήλ', 'Γραμματέας', '6940820840', 'Άνδρας', 'emarsen');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Νέτσκου', 'Αγγελική', 'Γραμματέας', '6978261908', 'Γυναίκα', 'agnetsk');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Γαβαλά', 'Ελένη', 'Γραμματέας', '6972303557', 'Γυναίκα', 'elgaval');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Χότζα', 'Ιωάννα', 'Νοσοκόμα', '6944184184', 'Γυναίκα', 'iwancho');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Καβάκλογλου', 'Αλίκη', 'Νοσοκόμα', '6939780249', 'Γυναίκα', 'alkavak');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Μακρυγιαννάκη', 'Δέσποινα', 'Νοσοκόμα', '6934588392', 'Γυναίκα', 'dmakrig');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Σαραγλή', 'Ηρώ', 'Νοσοκόμα', '6957236477', 'Γυναίκα','irosar');
+
+insert into Proswpiko(Epwnymo, Onoma, Thesi, Thlefwno, Fylo, Username) values
+('Γαβριηλίδη', 'Μάρθα', 'Νοσοκόμα', '6510904396', 'Γυναίκα', 'margav');
+
+end;
+
+/*
+
+insert into Proswpiko(IDProswpikou, Epwnymo, Onoma, Thesi, Thlefwno,
+Fylo, Username) values(100, 'Δημητρίου', 'Μαρία', 'Γραμματέας', 
+'6933498552', 'Γυναίκα', 'mardim');
+
+*/
+
+select P.onoma, P.epwnymo
+from Proswpiko P INNER JOIN Login L ON P.username=L.username
+where P.username='iwancho';
+
+
+================================================================================
+
+
+create TABLE Giatros (IDGiatrou Integer NOT NULL PRIMARY KEY, 
+Epwnymo Varchar(25), 
+Onoma Varchar(20), 
+Thlefwno Varchar(10),
+Eidikothta Varchar(40));
+
+insert into Giatros(IDGiatrou, Epwnymo, Onoma, Thlefwno, 
+Eidikothta) values(0, null, null, null, null);
+
+/* Κάνω ένα sequence και ένα trigger για να αυξάνεται αυτόματα το IDGiatrou */
+
+CREATE SEQUENCE GIATROS_SEQUENCE
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER GIATROS_TRIGGER
+BEFORE INSERT ON GIATROS FOR EACH ROW
+BEGIN
+  :new.IDGiatrou := Giatros_SEQUENCE.nextval;
+  END;
+
+begin
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Ζαφειρίου', 'Ευάγγελος', '6977224389', 'Οφθαλμίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Κούρτογλου', 'Γεώργιος', '6944465888', 'Παθολόγος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Σιδηρόπουλος', 'Νικόλαος', '2310230819', 'Παθολόγος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Νάτσης', 'Κωνσταντίνος', '2310250607', 'Ορθοπεδικός');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Γαβριηλίδης', 'Ιωσήφ', '6944188752', 'Ορθοπεδικός');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Παπαβραμίδης', 'Θεοδόσιος', '6944536972', 'Γενικός Χειρουργός');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Μπεκιαρίδου', 'Κωνσταντίνα', '2314002489', 'Παιδοχειρούργος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Κοκκίλη', 'Μαρία', '6932361358', 'Χειρουργός Παίδων');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Ραμματά', 'Αικατερίνη', '2310268900', 'Χειρουργός Παίδων');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Χατζηκεχαγιάς', 'Νικόλαος', '2310931820', 'Καρδιολόγος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Σκόρδας', 'Αχιλλέας', '6970968888', 'Καρδιολόγος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Στεργιόπουλος', 'Πέτρος', '6973403803', 'Οφθαλμίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Σουλτανίδης', 'Μαρίνος', '2310515158', 'Οφθαλμίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Μαυρούδης', 'Λεωνίδας', '2310224333', 'Οφθαλμίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Γωγάκη', 'Ελένη', '2310888018', 'Οφθαλμίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Ιγνατιάδου', 'Σοφία', '2310621278', 'Οδοντίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Παρχαρίδου', 'Αναστασία', '2310769674', 'Οδοντίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Μπουτσιούκη', 'Χριστίνα', '2313042147', 'Οδοντίατρος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Μιχαλόπουλος', 'Παύλος', '2310237337', 'Πνευμονολόγος');
+
+insert into Giatros(Epwnymo, Onoma, Thlefwno, Eidikothta) 
+values('Ελευθερίου - Γιδάρη', 'Κλειώ', '2310740001', 'Πνευμονολόγος');
+
+end;
+
+/*
+
+insert into Giatros(IDGiatrou, Epwnymo, Onoma, Thlefwno, 
+Eidikothta) values(22, 'Ζαφειρίου', 'Ευάγγελος', '6977224389', 'Οφθαλμίατρος');
+
+*/
+
+
+================================================================================
+
+
+create TABLE Exei (IDProswpikou Integer NOT NULL, 
+IDGiatrou Integer NOT NULL, 
+primary key (IDProswpikou, IDGiatrou),
+CONSTRAINT d_IDProswpikou foreign key(IDProswpikou) references Proswpiko, 
+CONSTRAINT d_IDGiatrou foreign key(IDGiatrou) references Giatros);
+
+/*
+
+insert into Exei(IDProswpikou, IDGiatrou) values(100, 22);
+
+*/
+
+begin
+
+insert into Exei(IDProswpikou, IDGiatrou) values(3, 6);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(8, 6);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(1, 16);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(9, 8);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(4, 8);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(6, 9);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(2, 9);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(5, 11);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(10, 11);
+
+insert into Exei(IDProswpikou, IDGiatrou) values(7, 19);
+
+end;
+
+SELECT A.onoma, A.epwnymo
+FROM Asthenis A INNER JOIN Login L ON A.username=L.username
+WHERE L.typos='Ασθενής';
+
+SELECT P.onoma, P.epwnymo
+FROM Proswpiko P INNER JOIN Login L ON P.username=L.username
+WHERE L.typos='Προσωπικό';
+
+SELECT G.onoma, G.epwnymo
+FROM Exei E INNER JOIN Giatros G ON E.IDGiatrou=G.IDGiatrou
+            INNER JOIN Proswpiko P ON E.IDProswpikou=P.IDProswpikou
+WHERE P.thesi='Νοσοκόμα';
+
+
+================================================================================
+
+
+create TABLE Kratisi (IDAstheni Integer NOT NULL, 
+IDGiatrou Integer NOT NULL, 
+HmeromhniaKratisis Date, 
+OraKratisis Varchar(5) CHECK (OraKratisis LIKE '__:__'),
+primary key (IDAstheni, IDGiatrou, HmeromhniaKratisis, OraKratisis),
+CONSTRAINT k_IDAstheni foreign key(IDAstheni) references Asthenis, 
+CONSTRAINT k_IDGiatrou foreign key(IDGiatrou) references Giatros);
+
+/* !!!!! ΝΕΟΣ ΠΙΝΑΚΑΣ ΚΡΑΤΗΣΗΣ !!!!! => ΟΧΙ ΤΕΛΙΚΑ!!!!! */
+
+/*
+create TABLE Kratisi (IDAstheni Integer NOT NULL, 
+IDGiatrou Integer NOT NULL,
+HmeromhniaKratisis Varchar(8) CHECK (HmeromhniaKratisis LIKE '__/__/__'), 
+OraKratisis CHAR(5) CHECK (OraKratisis LIKE '__:__'),
+primary key (IDAstheni, IDGiatrou, HmeromhniaKratisis, OraKratisis),
+CONSTRAINT k_IDAstheni foreign key(IDAstheni) references Asthenis, 
+CONSTRAINT k_IDGiatrou foreign key(IDGiatrou) references Giatros);
+*/
+
+/*
+
+!!!!! ΛΑΘΟΣ !!!!!
+
+CREATE SEQUENCE KRATISI_SEQUENCE
+START WITH 1
+INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER KRATISI_TRIGGER
+BEFORE INSERT ON KRATISI FOR EACH ROW
+BEGIN
+  :new.IDAstheni := Asthenis_SEQUENCE.nextval;
+  :new.IDGiatrou := Giatros_SEQUENCE.nextval;
+  END;
+
+*/
+
+
+
+insert into Kratisi(HmeromhniaKratisis, OraKratisis) 
+values('07/05/18', '11:00');
+
+!!!!! ΛΑΘΟΣ !!!!!
+
+/*
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(1, 1, '07/05/18', '11:00');
+
+*/
+
+begin
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(5, 1, '07/05/18', '11:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(5, 17, '10/05/18', '14:30');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(1, 5, '07/05/18', '09:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(4, 5, '07/05/18', '10:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(10, 5, '07/05/18', '11:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(2, 8, '08/05/18', '17:30');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(9, 14, '07/05/18', '11:30');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(8, 13, '01/06/18', '09:30');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(7, 19, '28/05/18', '13:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(7, 2, '04/06/18', '20:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(3, 3, '18/05/18', '16:30');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(2, 7, '16/05/18', '19:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(10, 9, '15/05/18', '15:00');
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(6, 6, '11/06/18', '10:00');
+
+end;
+
+/*
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+insert into Kratisi(IDAstheni, IDGiatrou, HmeromhniaKratisis, 
+OraKratisis) values(
+
+end;
+
+*/
+
+select A.onoma, A.epwnymo, K.orakratisis
+FROM Asthenis A INNER JOIN Kratisi K ON A.IDAstheni=K.IDAstheni
+WHERE OraKratisis LIKE '11:00';
+
+select A.onoma, A.epwnymo
+FROM  Kratisi K INNER JOIN Asthenis A ON A.IDAstheni=K.IDAstheni
+INNER JOIN Giatros G ON K.IDGiatrou=G.IDGiatrou
+WHERE G.eidikothta LIKE 'Οφθαλμίατρος';
+
+select A.onoma, A.epwnymo, K.orakratisis, K.HmeromhniaKratisis, G.onoma, G.epwnymo, G.eidikothta
+FROM Kratisi K INNER JOIN Asthenis A ON A.IDAstheni=K.IDAstheni
+INNER JOIN Giatros G ON K.IDGiatrou=G.IDGiatrou
+WHERE OraKratisis LIKE '11:00';
+
+select A.onoma, A.epwnymo, G.onoma, G.epwnymo
+FROM  Kratisi K INNER JOIN Asthenis A ON A.IDAstheni=K.IDAstheni
+INNER JOIN Giatros G ON K.IDGiatrou=G.IDGiatrou
+WHERE G.eidikothta LIKE 'Οφθαλμίατρος';
+
+
+================================================================================
+
+
+ΤΗΛΕΦΩΝΑ:
+
+Ασθενείς:
+
+1) 2310681814, Σταύρος, Παπαδόπουλος
+
+2) 6977882323, Ελπινίκη, Ιωαννίδου
+
+3) 6935032327, Φωτεινή Μακαντάση
+
+4) 2310353998, Θεοδώρα Παπαλάμπρου
+
+5) 6952395445, Δήμητρα Μακρή
+
+6) 6940561492, Βασιλική Γιατρά
+
+7) 2310156997, Θωμάς Κοσσοβίτης
+
+8) 6971123763, Πέτρος Ρωμανός
+
+9) 6941998664, Κυριακή Σταυρίδου
+
+10) 2310523760, Μιχαήλ Αγγέλου
+
+
+Γιατροί:
+
+1) 6977224389/2310551310
+
+2) Κούρτογλου, Γεώργιος, 6944465888/2319254030, Παθολόγος
+
+3) Σιδηρόπουλος, Νικόλαος, 6932421798/2310230819, Παθολόγος
+
+4) Νάτσης, Κωνσταντίνος, 6932600066/2310250607, Ορθοπεδικός
+
+5) Γαβριηλίδης, Ιωσήφ, 6944188752/2310262826, Ορθοπεδικός
+
+6) Παπαβραμίδης, Θεοδόσιος, 6944536972/2310420293, Γενικός Χειρουργός
+
+7) Μπεκιαρίδου, Κωνσταντίνα, 2314002489, Παιδοχειρούργος
+
+8) Κοκκίλη, Μαρία, 6932361358, Χειρουργός Παίδων
+
+9) Ραμματά, Αικατερίνη, 2310268900, Χειρουργός Παίδων
+
+10) Χατζηκεχαγιάς, Νικόλαος, 2310931820, Καρδιολόγος
+
+11) Σκόρδας, Αχιλλέας, 6970968888, Καρδιολόγος
+
+12) Στεργιόπουλος, Πέτρος, 6973403803, Οφθαλμίατρος
+
+13) Σουλτανίδης, Μαρίνος, 2310515158, Οφθαλμίατρος
+
+14) Μαυρούδης, Λεωνίδας, 2310224333, Οφθαλμίατρος
+
+15) Γωγάκη, Ελένη, 6944688815/2310888018, Οφθαλμίατρος
+
+16) Ιγνατιάδου, Σοφία, 2310621278, Οδοντίατρος
+
+17) Παρχαρίδου, Αναστασία, 2310769674, Οδοντίατρος
+
+18) Μπουτσιούκη, Χριστίνα, 2313042147, Οδοντίατρος
+
+19) Μιχαλόπουλος, Παύλος, 6972010424/2310237337, Πνευμονολόγος
+
+20) Ελευθερίου - Γιδάρη, Κλειώ, 6946680732/2310740001, Πνευμονολόγος
+
+
+Προσωπικό:
+
+1) 6933498552
+
+2) 6952682147
+
+3) 6940820840
+
+4) 6978261908
+
+5) 6972303557
+
+6) 6944184184
+
+7) 6939780249
+
+8) 6934588392
+
+9) 6957236477
+
+10) 6510904396
+
+
+Ώρες ραντεβού (ωράριο από 9:00 μέχρι 21:00):
+
+1) 9:00
+
+2) 9:30
+
+3) 10:00
+
+4) 10:30
+
+5) 11:00
+
+6) 11:30
+
+7) 12:00
+
+8) 12:30
+
+9) 13:00
+
+10) 13:30
+
+11) 14:00
+
+12) 14:30
+
+13) 15:00
+
+14) 15:30
+
+15) 16:00
+
+16) 16:30
+
+17) 17:00
+
+18) 17:30
+
+19) 18:00
+
+20) 18:30
+
+21) 19:00
+
+22) 19:30
+
+23) 20:00
+
+24) 20:30
+
+25) 21:00

@@ -1,0 +1,149 @@
+﻿1) INSERT ΣΤΟ LOGIN
+
+Για τον Ασθενή:
+
+username : pkarras
+
+password : dExD6NpC
+
+typos : Ασθενής
+
+--------------------
+
+Για το Προσωπικό:
+
+username : gsotiri
+
+password : gAX7QfIG
+
+typos : Προσωπικό
+
+--------------------
+
+
+2) UPDATE ΣΤΟ LOGIN
+
+password : dExD6NpC --> dExD6NBA
+
+Η ΑΛΗΘΕΙΑ ΕΙΝΑΙ ΟΤΙ ΔΕΝ ΕΧΩ ΚΑΝΕΙ ΝΑ ΓΙΝΕΤΑΙ UPDATE ΤΟ USERNAME.
+
+ΑΛΛΑΖΩ ΜΟΝΟ ΚΩΔΙΚΟ ΚΑΙ ΤΥΠΟ.
+
+
+3) DELETE ΣΤΟ LOGIN --> Βάζω ΜΟΝΟ το username
+
+
+================================================================================
+
+
+1) INSERT ΣΤΟ ASTHENIS (ΔΕ ΧΡΕΙΑΖΕΤΑΙ ΤΟ IDAstheni)
+
+Epwnymo : Καρράς
+
+Onoma : Παναγιώτης
+
+Thlefwno : 6942585862
+
+Fylo : Άνδρας
+
+Username : pkarras
+
+
+2) UPDATE ΣΤΟ ASTHENIS --> Γίνεται με βάση το IDAstheni συμπληρώνοντας ΟΛΑ τα
+   πεδία
+
+Η ΑΛΗΘΕΙΑ ΕΙΝΑΙ ΟΤΙ ΔΕΝ ΕΧΩ ΚΑΝΕΙ ΝΑ ΓΙΝΕΤΑΙ UPDATE ΤΟ USERNAME.
+
+
+3) DELETE ΣΤΟ ASTHENIS --> Βάζω ΜΟΝΟ το IDAstheni
+
+
+================================================================================
+
+
+1) INSERT ΣΤΟ PROSWPIKO (ΔΕ ΧΡΕΙΑΖΕΤΑΙ ΤΟ IDProswpikou)
+
+Epwnymo : Σωτηρίου
+
+Onoma : Γεώργιος
+
+Thesi : Βοηθός Γιατρού
+
+Thlefwno : 6949225722
+
+Fylo : Άνδρας
+
+Username : gsotiri
+
+
+2) UPDATE ΣΤΟ PROSWPIKO --> Γίνεται με βάση το IDProswpikou συμπληρώνοντας ΟΛΑ
+   τα πεδία
+
+Η ΑΛΗΘΕΙΑ ΕΙΝΑΙ ΟΤΙ ΔΕΝ ΕΧΩ ΚΑΝΕΙ ΝΑ ΓΙΝΕΤΑΙ UPDATE ΤΟ USERNAME.
+
+
+3) DELETE ΣΤΟ PROSWPIKO --> Βάζω ΜΟΝΟ το IDProswpikou
+
+
+================================================================================
+
+
+1) INSERT ΣΤΟ GIATROS (ΔΕ ΧΡΕΙΑΖΕΤΑΙ ΤΟ IDGiatrou)
+
+Epwnymo : Κιριμλίδου
+
+Onoma : Αικατερίνη
+
+Thlefwno : 2310269201
+
+Eidikothta : Δερματολόγος
+
+
+2) UPDATE ΣΤΟ GIATROS --> Γίνεται με βάση το IDGiatrou συμπληρώνοντας ΟΛΑ τα
+   πεδία
+
+
+3) DELETE ΣΤΟ GIATROS --> IDGiatrou
+
+
+================================================================================
+
+
+1) INSERT ΣΤΟ KRATISI
+
+IDAstheni : του Καρρά
+
+IDGiatrou : της Κιριμλίδου
+
+HmeromhniaKratisis : 29/05/18 ή 30/05/18
+
+OraKratisis : 13:30 ή 14:30
+
+
+2) UPDATE ΣΤΟ KRATISI --> Γίνεται με βάση το IDAstheni ΚΑΙ το IDGiatrou
+   συμπληρώνοντας ΟΛΑ τα πεδία
+
+ΑΛΛΑΖΩ ΗΜΕΡΟΜΗΝΙΑ ΚΑΙ ΩΡΑ.
+
+
+3) DELETE ΣΤΟ KRATISI --> Βάζω ΟΛΑ τα πεδία
+
+
+================================================================================
+
+
+1) INSERT ΣΤΟ EXEI
+
+IDProswpikou : του Καρρά
+
+IDGiatrou : του Σωτηρίου
+
+
+2) UPDATE ΣΤΟ EXEI --> Γίνεται με βάση το IDProswpikou ΚΑΙ το IDGiatrou
+   συμπληρώνοντας ΟΛΑ τα πεδία
+
+
+3) DELETE ΣΤΟ EXEI --> Βάζω τα ΕΝΗΜΕΡΩΜΕΝΑ πεδία IDProswpikou ΚΑΙ IDGiatrou
+
+
+================================================================================
